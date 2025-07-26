@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App.css または global.css */
+.custom-minimap {
+  width: 300px !important;
+  height: 200px !important;
+}
