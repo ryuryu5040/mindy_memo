@@ -6,6 +6,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +19,19 @@ use Inertia\Inertia;
 |
 */
 
+/*
 Route::get('/', function () {
     return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+*/
+
+Route::get('/', function () {
+    return Inertia::render('Memo/Title', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -40,8 +53,9 @@ Route::middleware('auth')->group(function () {
 
 Route::group(["middleware" => ["auth"]], function() {
 
-    Route::get("/top", [MemoController::class, "top"]);
-    Route::get("/edit/{memo}",[MemoController::class, "edit"]);
+    Route::get("/top", [MemoController::class, "top"])->name('top');
+    Route::get("/edit/{memo}",[MemoController::class, "edit"])->name('memos.edit');
+    Route::put("/memos/{memo}", [MemoController::class, "update"])->name('memos.update');
 
 });
 
