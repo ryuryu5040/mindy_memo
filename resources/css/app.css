@@ -4,6 +4,11 @@
 
 /* App.css または global.css */
 .custom-minimap {
-  width: 300px !important;
-  height: 200px !important;
+    width: 150px !important;
+    height: 100px !important;
+}
+
+.react-flow__node-default.selected {
+    box-shadow: 0 0 10px rgba(31, 32, 33, 0.5);
+    transition: border 0.2s ease, box-shadow 0.2s ease;
 }

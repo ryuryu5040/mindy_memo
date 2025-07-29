@@ -1,6 +1,8 @@
 import { Handle, Position, useReactFlow } from "@xyflow/react";
 import React, { useState, useCallback, useEffect, useRef } from "react";
-function LRHandleNode({ id, data }) {
+import "@xyflow/react/dist/style.css";
+
+function LRHandleNode({ id, data, selected }) {
     //console.log(data);
     const { setNodes } = useReactFlow();
     const [isEditing, setIsEditing] = useState(false);
@@ -50,7 +52,7 @@ function LRHandleNode({ id, data }) {
     return (
         // ダブルクリックで編集モードに切り替え
         <div
-            className="react-flow__node-default"
+            className={`react-flow__node-default ${selected ? "selected" : ""}`}
             onDoubleClick={() => setIsEditing(true)}
             onMouseDown={(e) => e.stopPropagation()} // クリックイベントの伝播を防ぐ
             onMouseUp={(e) => e.stopPropagation()} // クリックイベントの伝播を防ぐ
@@ -68,7 +70,9 @@ function LRHandleNode({ id, data }) {
                     onChange={(e) => setNodeLabel(e.target.value)}
                     onBlur={finishEditing}
                     onKeyDown={handleKeyDown}
-                    style={{ width: `${Math.max(50, nodeLabel.length * 8)}px` }}
+                    style={{
+                        width: `${Math.max(100, nodeLabel.length * 15)}px`,
+                    }}
                 />
             ) : (
                 <div
